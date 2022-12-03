@@ -1,2 +1,2 @@
-# The-development-of-stc89c52-SCM
+# Some note about the STC89C51
 Some experience and note about the stc89c51
