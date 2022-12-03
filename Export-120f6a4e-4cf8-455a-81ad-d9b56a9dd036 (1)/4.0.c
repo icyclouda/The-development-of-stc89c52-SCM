@@ -1,4 +1,4 @@
-#include <reg52.h>//4.0
+#include <reg52.h>//bluetooth cars4.0
 sbit M1=P0^0;
 sbit M1_base=P0^1;
 sbit M2=P2^0;
@@ -6,7 +6,7 @@ sbit M2_base=P2^1;
 
  char a=0,b=0;
 char ZKBL=0,ZKBR=0;
-void u( char ch)//·´À¡Çé¿ö
+void u( char ch)//åé¦ˆæƒ…å†µ
 {
 	SBUF=ch;
 	while(!TI);//waiting
@@ -45,18 +45,18 @@ void CSH(void)
 {
 	
 	EA=1;
-  PCON &= 0x7F;		//½«smod=0²»·­±¶
+  PCON &= 0x7F;		//å°†smod=0ä¸ç¿»å€
 	SCON = 0x50;		//SM0=0;SM1=1;SM2=0;REN=1;TB8=RB8=TI=RI=0
-	TMOD = 0x21;		//T0Ä£Ê½2\T1Ä£Ê½3
-	TL1 = 0xFD;			// ²¨ÌØÂÊ9600
+	TMOD = 0x21;		//T0æ¨¡å¼2\T1æ¨¡å¼3
+	TL1 = 0xFD;			// æ³¢ç‰¹ç‡9600
 	TH1 = 0xFD;			
 	TL0 = 0x00;
 	TH0 = 0xFF;
-	ET1 = 0;			//¶¨Ê±ÖĞ¶Ï¿ª
+	ET1 = 0;			//å®šæ—¶ä¸­æ–­å¼€
 	ET0 = 1;
 	TR1 = 1;
-    TR0 = 1; 	//¶¨Ê±Æ÷1Æô¶¯
-	ES = 1;		//´®¿ÚÖĞ¶Ï¿ª
+    TR0 = 1; 	//å®šæ—¶å™¨1å¯åŠ¨
+	ES = 1;		//ä¸²å£ä¸­æ–­å¼€
 	PS=1;
 }
 
@@ -73,25 +73,25 @@ void main()
 void Uart_Bluetooth() interrupt 4		
 {
 			 char transmit;
-			while(!RI);//waiting¡¢¡¢
+			while(!RI);//waitingã€ã€
 			RI=0;
 	    transmit=SBUF;
 			switch(transmit)
 			{
 				case '0':ZKBR=ZKBL=0;break;//stop
-				case '1':ZKBR=87;ZKBL=100;break;//RUSH!£¨ÀÏ´ó£©
-				case '2':ZKBR=100;ZKBL=0;break;//´ó×ó×ª
-				case '3':ZKBR=0;ZKBL=100;break;//´óÓÒ×ª
-				case '4':ZKBR=100;ZKBL=60;break;//¿ì×ó×ª
-				case '5':ZKBR=60;ZKBL=100;break;//¿ìÓÒ×ª
-				case '6':ZKBR=60;ZKBL=0;break;//Ğ¡×ó×ª
-				case '7':ZKBR=0;ZKBL=60;break;//Ğ¡ÓÒ×ª
-				case '8':ZKBR=75;ZKBL=75;break;//ÖĞËÙ£¨ĞÎÍ¬£©
-				case '9':ZKBR=55;ZKBL=55;break;//µÍËÙ£¨ĞéÉè£©
-				case 'a':ZKBR=-69;ZKBL=-75;break;//Ö±×ßµ¹³µ(×óÂÖ¹ÊÕÏ)
+				case '1':ZKBR=87;ZKBL=100;break;//RUSH!ï¼ˆè€å¤§ï¼‰
+				case '2':ZKBR=100;ZKBL=0;break;//å¤§å·¦è½¬
+				case '3':ZKBR=0;ZKBL=100;break;//å¤§å³è½¬
+				case '4':ZKBR=100;ZKBL=60;break;//å¿«å·¦è½¬
+				case '5':ZKBR=60;ZKBL=100;break;//å¿«å³è½¬
+				case '6':ZKBR=60;ZKBL=0;break;//å°å·¦è½¬
+				case '7':ZKBR=0;ZKBL=60;break;//å°å³è½¬
+				case '8':ZKBR=75;ZKBL=75;break;//ä¸­é€Ÿï¼ˆå½¢åŒï¼‰
+				case '9':ZKBR=55;ZKBL=55;break;//ä½é€Ÿï¼ˆè™šè®¾ï¼‰
+				case 'a':ZKBR=-69;ZKBL=-75;break;//ç›´èµ°å€’è½¦(å·¦è½®æ•…éšœ)
 				default:break;
 			}
-		u(ZKBR);//¼ì²âÖµ
+		u(ZKBR);//æ£€æµ‹å€¼
 		
 }
 
